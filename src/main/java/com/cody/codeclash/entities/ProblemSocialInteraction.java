@@ -23,4 +23,6 @@ public class ProblemSocialInteraction {
 
     private List<Comment> comments;
 
-    private List<Rating> ra
+    private List<Rating> ratings;
+
+}
