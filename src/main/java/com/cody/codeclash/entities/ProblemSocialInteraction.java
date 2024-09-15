@@ -21,8 +21,10 @@ public class ProblemSocialInteraction {
 
     private Long saves;
 
+    @OneToMany
     private List<Comment> comments;
 
+    @OneToMany
     private List<Rating> ratings;
 
 }

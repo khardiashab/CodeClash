@@ -11,6 +11,6 @@ import com.cody.codeclash.entities.Problem;
 @Repository
 public interface ProblemRepository extends JpaRepository <Problem ,Long>{
 
-    @Query("SELECT p FROM Problem p WHERE p.description IS NOT NULL")
+    @Query("SELECT p FROM Problem p Left Join Fetch p.description")
     List<Problem> findAllWithDescription();
 } 

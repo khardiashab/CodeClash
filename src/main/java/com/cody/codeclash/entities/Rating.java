@@ -20,6 +20,6 @@ public class Rating {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
-    private Long problemId;
+    private Problem problemId;
 
 }

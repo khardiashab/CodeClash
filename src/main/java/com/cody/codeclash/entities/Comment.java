@@ -20,5 +20,5 @@ public class Comment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
-    private long problemId;
+    private Problem problem;
 }

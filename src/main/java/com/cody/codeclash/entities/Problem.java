@@ -26,7 +26,7 @@ public class Problem {
     private Difficulty difficulty;
 
 
-    @ManyToMany(mappedBy = "problems")
+    @ManyToMany 
     private Set<Tag> tags;
 
     @OneToOne(fetch = FetchType.LAZY)

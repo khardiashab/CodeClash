@@ -21,7 +21,7 @@ public class ProblemDescription {
 
     private String examples;
 
-    private String constrains;
+    private String constraints;
 
 
 }
