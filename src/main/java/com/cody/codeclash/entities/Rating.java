@@ -20,6 +20,18 @@ public class Rating {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "problem_id")
-    private Problem problemId;
+    private Problem problem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+
+    @Override
+    public String toString() {
+        return "Rating [id=" + id + ", score=" + score + "]";
+    }
+
+
 
 }

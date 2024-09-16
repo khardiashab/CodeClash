@@ -1,6 +1,8 @@
 package com.cody.codeclash.entities;
 
 import lombok.Data;
+
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.*;
@@ -22,7 +24,8 @@ public class ProblemDescription {
 
     private String examples;
 
-    private String constraints;
+    // ? do something about
+    private List<String> constraints;
 
 
 
