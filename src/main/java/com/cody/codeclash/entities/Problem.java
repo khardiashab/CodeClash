@@ -27,13 +27,55 @@ public class Problem {
 
     private Difficulty difficulty;
 
-    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     private Set<Tag> tags;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProblemDescription description;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProblemSocialInteraction interaction;
+
+
+    public void addTag(Tag tag) {
+        if (tags == null) {
+            tags = Set.of();
+        }
+        tags.add(tag);
+    }
+
+    @Override
+    public String toString() {
+        return "Problem [id=" + id + ", title=" + title + ", difficulty=" + difficulty +
+        ", decription=" + (description != null ? description.getId() : "null") +
+        ", tags=" + (tags != null ? tags.size() : "null") +
+        ", interaction=" + (interaction != null ? interaction.getId() : "null") +
+         "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Problem other = (Problem) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
 
 }

@@ -39,7 +39,7 @@ public class CodeclashApplication implements CommandLineRunner {
 	@Transactional
 	public void run(String... args) throws Exception {
 
-		saveData(repository, tagRepository, descriptionRepository);
+		// saveData(repository, tagRepository, descriptionRepository);
 		System.out.println("Applcation is running ...");
 
 		tagRepository.findAll().forEach(t -> {

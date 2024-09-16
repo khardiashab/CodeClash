@@ -1,5 +1,6 @@
 package com.cody.codeclash.entities;
 
+import java.util.Objects;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -14,7 +15,7 @@ import lombok.Data;
 @Entity
 public class Tag {
 
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -22,4 +23,24 @@ public class Tag {
 
     @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<Problem> problems;
+
+    @Override
+    public String toString() {
+        return "Tag [id=" + id + ", name=" + name + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null || getClass() != obj.getClass())
+            return false;
+        Tag other = (Tag) obj;
+        return Objects.equals(id, other.id);
+    }
 }
