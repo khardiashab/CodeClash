@@ -3,6 +3,7 @@ package com.cody.codeclash.entities;
 import lombok.Data;
 
 import jakarta.persistence.*;
+
 @Data
 @Entity
 public class ProblemDescription {
@@ -12,8 +13,7 @@ public class ProblemDescription {
     private Long id;
 
     // how to define one to one relationship
-    @MapsId
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private Problem problem;
 
@@ -23,7 +23,4 @@ public class ProblemDescription {
 
     private String constraints;
 
-
 }
-
-

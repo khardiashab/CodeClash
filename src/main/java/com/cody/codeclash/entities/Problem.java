@@ -1,17 +1,19 @@
 package com.cody.codeclash.entities;
 
-import jakarta.persistence.Entity;
-import lombok.Data;
-
-import java.sql.Date;
 import java.util.Set;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import com.cody.codeclash.entities.enums.Difficulty;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+import lombok.Data;
 
 @Data
 @Entity
@@ -25,8 +27,7 @@ public class Problem {
 
     private Difficulty difficulty;
 
-
-    @ManyToMany 
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Tag> tags;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -34,16 +35,5 @@ public class Problem {
 
     @OneToOne(fetch = FetchType.LAZY)
     private ProblemSocialInteraction interaction;
-
-    @CreationTimestamp
-    private Date dateCreated;
- 
-    @UpdateTimestamp
-    private Date updatedAt;
-
-
-
-    
-    
 
 }

@@ -11,7 +11,6 @@ public class ProblemSocialInteraction {
     @Id
     private Long id;
 
-    @MapsId
     @OneToOne
     @JoinColumn(name = "id")
     private Problem problem;    
