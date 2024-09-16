@@ -1,6 +1,9 @@
 package com.cody.codeclash.entities;
 
 import java.util.Objects;
+
+import com.cody.codeclash.entities.enums.Reaction;
+
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -32,6 +35,8 @@ public class UserProblemAction {
     private Reaction reaction;
 
     private boolean saved;
+
+
 
 
 

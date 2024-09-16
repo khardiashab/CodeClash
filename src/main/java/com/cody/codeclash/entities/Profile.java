@@ -9,7 +9,7 @@ public class Profile {
 
     private String bio;
 
-    private Enum primaryCodingLanguage;
+    private Language primaryCodingLanguage;
 
 
     private String avatar;

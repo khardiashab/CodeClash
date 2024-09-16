@@ -37,6 +37,10 @@ public class Problem {
     private ProblemSocialInteraction interaction;
 
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private ProblemEntryCodeAndTestCases solutionsAndTestCases;
+
+
     public void addTag(Tag tag) {
         if (tags == null) {
             tags = Set.of();
