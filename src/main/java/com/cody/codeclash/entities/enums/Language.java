@@ -1,4 +1,4 @@
-package com.cody.codeclash.entities;
+package com.cody.codeclash.entities.enums;
 
 public enum Language {
 
