@@ -10,9 +10,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 public class ProblemEntryCodeAndTestCases {
 
@@ -29,7 +37,6 @@ public class ProblemEntryCodeAndTestCases {
     @OneToMany(mappedBy = "problem", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<TestCase> testCases = new ArrayList<>();
 
-
     public void addEntryCode(EntryCode entryCode) {
         entryCodes.add(entryCode);
     }
@@ -38,8 +45,5 @@ public class ProblemEntryCodeAndTestCases {
 
         testCases.add(testCase);
     }
-
-    
-
 
 }

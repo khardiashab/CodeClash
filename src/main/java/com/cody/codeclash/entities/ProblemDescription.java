@@ -1,13 +1,25 @@
 package com.cody.codeclash.entities;
 
-import lombok.Data;
-
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
 @Entity
 public class ProblemDescription {
 
@@ -26,8 +38,6 @@ public class ProblemDescription {
 
     // ? do something about
     private List<String> constraints;
-
-
 
     @Override
     public String toString() {
