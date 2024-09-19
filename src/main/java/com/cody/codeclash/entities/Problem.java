@@ -3,6 +3,7 @@ package com.cody.codeclash.entities;
 import java.util.Set;
 
 import com.cody.codeclash.entities.enums.Difficulty;
+import com.cody.codeclash.entities.enums.Status;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -35,6 +36,9 @@ public class Problem {
     private String title;
 
     private Difficulty difficulty;
+
+
+    private Status status = Status.DRAFT;
 
     @ManyToMany(cascade = CascadeType.REMOVE)
     private Set<Tag> tags;

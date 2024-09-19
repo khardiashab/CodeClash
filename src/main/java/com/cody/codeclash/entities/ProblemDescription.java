@@ -39,6 +39,10 @@ public class ProblemDescription {
     // ? do something about
     private List<String> constraints;
 
+    private String timeComplexity;
+
+    private String spaceComplexity;
+
     @Override
     public String toString() {
         return "ProblemDescription [id=" + id + ", description=" + description + ", examples=" + examples

@@ -2,7 +2,9 @@ package com.cody.codeclash.services;
 
 import org.springframework.stereotype.Service;
 
+import com.cody.codeclash.FullProblemRequest;
 import com.cody.codeclash.entities.Problem;
+import com.cody.codeclash.entities.ProblemDescription;
 import com.cody.codeclash.repositories.ProblemRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -27,6 +29,20 @@ public class ProblemService {
         throw new UnsupportedOperationException("Unimplemented method 'validUserProblemActionExists'");
     }
 
+    public void save(Problem problem) {
+        repository.save(problem);
+     */
+    }
+
+    public void saveFullProblem(Problem problem, ProblemDescription description) {
+
     
 
 }
+
+
+
+    public void createFullProblem(FullProblemRequest entity) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createFullProblem'");
+    }

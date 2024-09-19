@@ -15,7 +15,9 @@ public class TagService {
 
     public final TagRepository repository;
 
-    public void save(Tag tag) {
+    public void createTag(String tagName) {
+        Tag tag = new Tag();
+        tag.setName(tagName);
         repository.save(tag);
     }
 
