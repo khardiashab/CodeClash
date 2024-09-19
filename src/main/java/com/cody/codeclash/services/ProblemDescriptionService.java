@@ -2,9 +2,11 @@ package com.cody.codeclash.services;
 
 import org.springframework.stereotype.Service;
 
+import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.ProblemDescription;
 import com.cody.codeclash.entities.dtos.ProblemDescriptionDto;
 import com.cody.codeclash.repositories.DescriptionRepository;
+import com.cody.codeclash.repositories.ProblemRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -12,11 +14,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProblemDescriptionService {
 
-    public final DescriptionRepository repository;
+    private final DescriptionRepository repository;
 
+    private final ProblemRepository problemRepository;
 
-    public void save(ProblemDescription description) {
-        repository.save(description);
+    public void save(Long problemId, ProblemDescription description) {
+        Problem problem = problemRepository.getReferenceById(problemId);
+        description.setProblem(problem);
+         repository.save(description);
     }
 
     public void update(ProblemDescription description) {
@@ -29,7 +34,8 @@ public class ProblemDescriptionService {
      *
      * @param id the id of the problem description
      * @return the problem description with the given id
-     * @throws IllegalArgumentException if no problem description with the given id exists
+     * @throws IllegalArgumentException if no problem description with the given id
+     *                                  exists
      */
     public ProblemDescriptionDto getDtoById(Long id) {
         ProblemDescription pd = getById(id);
@@ -42,15 +48,8 @@ public class ProblemDescriptionService {
         repository.delete(description);
     }
 
-
-
-
     private ProblemDescription getById(Long id) {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Problem description not found"));
     }
-
-
-
-
 
 }
