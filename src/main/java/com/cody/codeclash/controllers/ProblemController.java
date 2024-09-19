@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cody.codeclash.ProblemRequestDto;
-import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.Tag;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.services.ProblemService;
@@ -48,15 +47,15 @@ public class ProblemController {
     }
 
     @PutMapping("/{problemId}")
-    public void update(@RequestBody Problem problem){
-        service.update(problem);
+    public void update(@PathVariable Long problemId, @RequestBody ProblemRequestDto problem){
+        service.update(problemId, problem);
     }
 
 
     @DeleteMapping("/{problemId}")
-    public void delete(@PathVariable Long problemId, @RequestBody Problem problem)
+    public void delete(@PathVariable Long problemId)
     {
-        service.delete(problem);
+        service.delete(problemId);
     }
 
     

@@ -46,8 +46,9 @@ public class ProblemDescription {
     @Override
     public String toString() {
         return "ProblemDescription [id=" + id + ", description=" + description + ", examples=" + examples
-                + ", constraints=" + constraints + "]";
+                + ", timeComplexity=" + timeComplexity + ", spaceComplexity=" + spaceComplexity + "]";
     }
+
 
     @Override
     public int hashCode() {

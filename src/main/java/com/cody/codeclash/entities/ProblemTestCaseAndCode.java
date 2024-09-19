@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-public class ProblemEntryCodeAndTestCases {
+public class ProblemTestCaseAndCode {
 
     @Id
     private Long id;

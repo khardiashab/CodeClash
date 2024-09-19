@@ -3,8 +3,7 @@ package com.cody.codeclash.services;
 import org.springframework.stereotype.Service;
 
 import com.cody.codeclash.entities.Problem;
-import com.cody.codeclash.entities.ProblemDescription;
-import com.cody.codeclash.entities.dtos.ProblemDescriptionDto;
+import com.cody.codeclash.entities.dtos.DescriptionRequestDto;
 import com.cody.codeclash.repositories.DescriptionRepository;
 import com.cody.codeclash.repositories.ProblemRepository;
 
@@ -18,38 +17,28 @@ public class ProblemDescriptionService {
 
     private final ProblemRepository problemRepository;
 
-    public void save(Long problemId, ProblemDescription description) {
-        Problem problem = problemRepository.getReferenceById(problemId);
-        description.setProblem(problem);
+    private final ProblemService problemService;           
+    public void save(Long problemId, DescriptionRequestDto descriptiondDto) {
+        Problem problem = problemService.getById(problemId);
+        problemService.validateProblemAuthor(problem);
+        if(repository.existsById(problemId)){
+            throw new RuntimeException("Description already exists for problem: " + problemId);
+        }
+        var description = descriptiondDto.toEntity();
+        description.setProblem(Problem.builder().id(problemId).build());
          repository.save(description);
     }
 
-    public void update(ProblemDescription description) {
-        getById(description.getId());
+
+    public void update(Long problemId, DescriptionRequestDto descriptiondDto) {
+        var description = repository.getReferenceById(problemId);
+        description.setDescription(descriptiondDto.getDescription());
+        description.setExamples(descriptiondDto.getExamples());
+        description.setConstraints(descriptiondDto.getConstraints());
+        description.setTimeComplexity(descriptiondDto.getTimeComplexity());
+        description.setSpaceComplexity(descriptiondDto.getSpaceComplexity());
         repository.save(description);
     }
 
-    /**
-     * Gets a problem description by id.
-     *
-     * @param id the id of the problem description
-     * @return the problem description with the given id
-     * @throws IllegalArgumentException if no problem description with the given id
-     *                                  exists
-     */
-    public ProblemDescriptionDto getDtoById(Long id) {
-        ProblemDescription pd = getById(id);
-        return ProblemDescriptionDto.from(pd);
-    }
-
-    public void delete(ProblemDescription description) {
-
-        getById(description.getId());
-        repository.delete(description);
-    }
-
-    private ProblemDescription getById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Problem description not found"));
-    }
-
+    
 }

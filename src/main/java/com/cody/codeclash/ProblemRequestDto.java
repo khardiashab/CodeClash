@@ -25,12 +25,5 @@ public class ProblemRequestDto {
 
     private Set<Tag> tags;
 
-    public static Problem mapAProblem(ProblemRequestDto dto){
-
-        return Problem.builder()
-                    .title(dto.getTitle())
-                    .difficulty(Difficulty.valueOf(dto.getDifficulty().toUpperCase()))
-                    .tags(dto.getTags())
-                    .build();
-    }
+   
 }
