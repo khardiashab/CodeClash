@@ -74,6 +74,15 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+
+		<!-- swagger api -->
+		<dependency>
+    <groupId>org.springdoc</groupId>
+    <artifactId>springdoc-openapi-ui</artifactId>
+    <version>1.7.0</version> <!-- Check for the latest version -->
+</dependency>
+
 	</dependencies>
 
 	<build>

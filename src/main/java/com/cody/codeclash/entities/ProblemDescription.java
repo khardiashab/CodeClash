@@ -3,6 +3,9 @@ package com.cody.codeclash.entities;
 import java.util.List;
 import java.util.Objects;
 
+import org.hibernate.annotations.CollectionType;
+
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -36,7 +39,7 @@ public class ProblemDescription {
 
     private String examples;
 
-    // ? do something about
+    @CollectionTable(name = "problem_description_constraints", joinColumns = @JoinColumn(name = "problem_description_id"))
     private List<String> constraints;
 
     private String timeComplexity;
