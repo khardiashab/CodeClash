@@ -10,6 +10,7 @@ import com.cody.codeclash.entities.Comment;
 import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.dtos.UserDto;
 import com.cody.codeclash.repositories.CommentRepository;
+import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.utils.UtilityFunctions;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -21,25 +22,22 @@ public class CommentService {
 
     private final CommentRepository repository;
 
-    private final ProblemService problemService;
+    private final ProblemRepository problemRepository;
 
     public void save(Long problemId, String content) {
         Comment comment = new Comment();
         comment.setContent(content);
-        comment.setProblem(problemService.getById(problemId));
+        comment.setProblem(problemRepository.getReferenceById(problemId));
         UserDto userDto = UtilityFunctions.getUserDto();
         comment.setUserId(userDto.id());
         repository.save(comment);
     }
 
     public void delete(Long problemId, Long id) {
-        problemService.getById(problemId);
         repository.deleteById(id);
     }
 
     public void update(Long problemId, Long id, String content) {
-        problemService.getById(problemId);
-        getById(id);
         Comment comment = getById(id);
         comment.setContent(content);
         repository.save(comment);
@@ -51,18 +49,13 @@ public class CommentService {
 
     public List<Comment> getAllUserCommentsOnProblem
     (Long problemId) {
-        Problem problem = problemService.getById(problemId);
-        problem = new Problem().builder().id(problemId).build();
 
-        return repository.findAllByProblemAndUserId(problem, UtilityFunctions.getUserDto().id());
+        return repository.findAllByProblemAndUserId(problemRepository.getReferenceById(problemId),  UtilityFunctions.getUserDto().id());
     }
 
 
     public Page<Comment> getAllCommentsOnProblem(Long problemId, Pageable pageable) {
-        Problem problem = problemService.getById(problemId);
-  
-        problem = Problem.builder().id(problemId).build();
-        return repository.findAllByProblem(problem, pageable);
+        return repository.findAllByProblem(problemRepository.getReferenceById(problemId), pageable);
     }
 
 

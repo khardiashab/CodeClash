@@ -20,6 +20,13 @@ public class ProblemService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Problem not found: " + id));
     }
 
+
+
+    public void validUserProblemActionExists(Long problemId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'validUserProblemActionExists'");
+    }
+
     
 
 }

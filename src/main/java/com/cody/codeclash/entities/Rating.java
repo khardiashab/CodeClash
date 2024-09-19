@@ -37,4 +37,9 @@ public class Rating {
         return "Rating [id=" + id + ", score=" + score + "]";
     }
 
+    public Rating orElseThrow(Object object) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'orElseThrow'");
+    }
+
 }
