@@ -2,9 +2,9 @@ package com.cody.codeclash.services;
 
 import org.springframework.stereotype.Service;
 
-import com.cody.codeclash.ProblemRequestDto;
 import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.Tag;
+import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.entities.enums.Difficulty;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.utils.UtilityFunctions;

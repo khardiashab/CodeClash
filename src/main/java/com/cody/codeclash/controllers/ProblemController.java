@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cody.codeclash.ProblemRequestDto;
 import com.cody.codeclash.entities.Tag;
+import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.services.ProblemService;
 

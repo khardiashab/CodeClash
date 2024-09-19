@@ -48,4 +48,12 @@ public class ProblemTestCaseAndCode {
         testCases.add(testCase);
     }
 
+    public void removeEntryCode(EntryCode entryCode) {
+        entryCodes.remove(entryCode);   
+    }
+
+    public void removeTestCase(TestCase testCase) {
+        testCases.remove(testCase);
+    }
+
 }

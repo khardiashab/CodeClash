@@ -1,5 +1,6 @@
 package com.cody.codeclash.entities;
 
+import com.cody.codeclash.entities.TestCase.TestCaseBuilder;
 import com.cody.codeclash.entities.enums.Language;
 
 import jakarta.persistence.Entity;
@@ -23,6 +24,7 @@ public class EntryCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long problemId;
     private Language language;
     private String code;
 

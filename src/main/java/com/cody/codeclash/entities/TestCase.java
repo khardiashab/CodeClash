@@ -21,8 +21,7 @@ public class TestCase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String inputType;
+    private Long problemId;
     private String input;
-    private String outputType;
-    private String output;
+    private String expectedOutput;
 }

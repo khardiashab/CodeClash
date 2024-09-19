@@ -1,10 +1,8 @@
-package com.cody.codeclash;
+package com.cody.codeclash.entities.dtos;
 
 import java.util.Set;
 
-import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.Tag;
-import com.cody.codeclash.entities.enums.Difficulty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,5 +23,4 @@ public class ProblemRequestDto {
 
     private Set<Tag> tags;
 
-   
 }
