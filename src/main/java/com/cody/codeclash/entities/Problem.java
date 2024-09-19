@@ -50,7 +50,7 @@ public class Problem {
 
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private ProblemTestCaseAndCode solutionsAndTestCases;
+    private ProblemTestCaseAndCode testCaseAndCode;
 
     private Long authorId;
 

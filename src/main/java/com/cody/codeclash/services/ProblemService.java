@@ -3,13 +3,18 @@ package com.cody.codeclash.services;
 import org.springframework.stereotype.Service;
 
 import com.cody.codeclash.entities.Problem;
+import com.cody.codeclash.entities.ProblemDescription;
+import com.cody.codeclash.entities.ProblemTestCaseAndCode;
 import com.cody.codeclash.entities.Tag;
 import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.entities.enums.Difficulty;
+import com.cody.codeclash.entities.enums.Language;
+import com.cody.codeclash.entities.enums.Status;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.utils.UtilityFunctions;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -68,6 +73,34 @@ public class ProblemService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Problem not found: " + id));
     }
 
+    // Publish a problem 
+
+    @Transactional
+    public void publish(Long problemId) {
+        var problem = getById(problemId);
+        validateProblemAuthor(problem);
+        ProblemDescription pd = problem.getDescription();
+        if (null == pd) {
+            throw new RuntimeException("Problem description is not set.");
+        }
+        ProblemTestCaseAndCode testCaseAndCode = problem.getTestCaseAndCode();
+        if(null == testCaseAndCode){
+            throw new RuntimeException("Problem testcase and code is not set.");
+        }
+        if(testCaseAndCode.getEntryCodes().size() != Language.values().length){
+            throw new RuntimeException("You have not set the entry code for all languages.");
+        }
+
+        if(testCaseAndCode.getTestCases().size() < 3){
+            throw new RuntimeException("You have not set at least 3 test cases.");
+        }
+        problem.setStatus(Status.PUBLISHED);
+        problem.setDescription(null);
+        problem.setTestCaseAndCode(null);
+        repository.save(problem);
+
+    }
+    
     // Helping function to stop repetative code
 
     public void validateProblemAuthor(Problem problem) {

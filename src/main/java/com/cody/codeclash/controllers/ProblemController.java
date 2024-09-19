@@ -58,6 +58,13 @@ public class ProblemController {
         service.delete(problemId);
     }
 
+
+    // publish a problem
+    @PutMapping("/{problemId}/publish")
+    public void publish(@PathVariable Long problemId) {
+        service.publish(problemId);
+    }
+
     
 
 
