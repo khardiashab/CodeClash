@@ -53,7 +53,9 @@ public class Problem {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private ProblemEntryCodeAndTestCases solutionsAndTestCases;
 
+    private Long authorId;
 
+    private String authorName;
     public void addTag(Tag tag) {
         if (tags == null) {
             tags = Set.of();
@@ -61,6 +63,11 @@ public class Problem {
         tags.add(tag);
     }
 
+    public void removeTag(Tag tag){
+        if(tags != null){
+            tags.remove(tag);
+        }
+    }
     @Override
     public String toString() {
         return "Problem [id=" + id + ", title=" + title + ", difficulty=" + difficulty +
