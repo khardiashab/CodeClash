@@ -25,19 +25,18 @@ public class UserProblemActionController {
 
     @GetMapping("/")
     public UserProblemActionDto getUserActionOnAProblem(@PathVariable Long problemId) {
-        // TODO implement here service logic.
-        return null;
+        return service.getByProblemId(problemId);
     }
 
     
     @PutMapping("/reaction")
     public void updateReaction(@PathVariable Long problemId, @RequestParam Reaction reaction) {
-        // TODO implement here service logic.
+        service.updateReaction(problemId, reaction);
     }
 
     @PutMapping("/save-status")
     public void updateSaveStatus(@PathVariable Long problemId, @RequestParam boolean saveStatus) {
-        // TODO implement here service logic.
+        service.updateSaveStatus(problemId, saveStatus);
     }
 
     @PostMapping("/run-test-case/{testCaseId}")
