@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cody.codeclash.entities.dtos.TagDto;
 import com.cody.codeclash.services.TagService;
 
 import lombok.RequiredArgsConstructor;

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.cody.codeclash.controllers.TagDto;
 import com.cody.codeclash.entities.Tag;
+import com.cody.codeclash.entities.dtos.TagDto;
 import com.cody.codeclash.repositories.TagRepository;
 
 import lombok.RequiredArgsConstructor;

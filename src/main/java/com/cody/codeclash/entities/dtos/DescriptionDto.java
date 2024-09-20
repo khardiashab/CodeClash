@@ -1,6 +1,6 @@
 package com.cody.codeclash.entities.dtos;
 
-import java.util.*;
+import java.util.List;
 
 import com.cody.codeclash.entities.ProblemDescription;
 
@@ -14,8 +14,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder                  
-public class DescriptionRequestDto {
+@Builder
+public class DescriptionDto {
+
+    private Long problemId;
 
     private String description;
 
@@ -27,6 +29,12 @@ public class DescriptionRequestDto {
 
     private String spaceComplexity;
 
+    /**
+     * Converts this DTO to a ProblemDescription entity.
+     * It will used to create a new ProblemDescription entity.
+     * 
+     * @return a new ProblemDescription entity with the same state as this DTO.
+     */
     public ProblemDescription toEntity() {
         return ProblemDescription.builder()
                 .description(description)
@@ -37,8 +45,9 @@ public class DescriptionRequestDto {
                 .build();
     }
 
-    public static DescriptionRequestDto from(ProblemDescription description) {
-        return DescriptionRequestDto.builder()
+    public static DescriptionDto from(ProblemDescription description) {
+        return DescriptionDto.builder()
+                .problemId(description.getProblem().getId())
                 .description(description.getDescription())
                 .examples(description.getExamples())
                 .constraints(description.getConstraints())

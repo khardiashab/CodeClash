@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.ProblemDescription;
+import com.cody.codeclash.entities.ProblemSocialInteraction;
 import com.cody.codeclash.entities.ProblemTestCaseAndCode;
 import com.cody.codeclash.entities.Tag;
+import com.cody.codeclash.entities.dtos.ProblemDto;
 import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.entities.enums.Difficulty;
 import com.cody.codeclash.entities.enums.Language;
@@ -25,12 +27,15 @@ public class ProblemService {
 
     private final ProblemRepository repository;
 
+    private final ProblemInteractionService interactionService;
+
     // ----------Create and Update method ---------------------
     public void create(ProblemRequestDto dto) {
         var problem = Problem.builder()
                 .title(dto.getTitle())
                 .difficulty(null != dto.getDifficulty() ? Difficulty.valueOf(dto.getDifficulty().toUpperCase()) : null)
                 .tags(null != dto.getTags() ? dto.getTags() : null)
+                .status(Status.DRAFT)
                 .authorId(UtilityFunctions.getUserDto().id())
                 .authorName(UtilityFunctions.getUserDto().username())
                 .build();
@@ -96,6 +101,11 @@ public class ProblemService {
         if (testCaseAndCode.getTestCases().size() < 3) {
             throw new RuntimeException("You have not set at least 3 test cases.");
         }
+        // Add problem interation table here.
+        ProblemSocialInteraction ps = new ProblemSocialInteraction();
+        ps.setProblem(Problem.builder().id(problemId).build());
+        interactionService.save(ps);
+    
         problem.setStatus(Status.PUBLISHED);
         problem.setDescription(null);
         problem.setTestCaseAndCode(null);
@@ -104,8 +114,8 @@ public class ProblemService {
     }
 
     // Get all problems 
-    public List<Problem> getAll() {
-        return repository.findAll();
+    public List<ProblemDto> getAll() {
+        return repository.findAll().stream().map(ProblemDto::from).toList();
     }
 
     // Helping function to stop repetative code

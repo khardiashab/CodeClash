@@ -1,6 +1,8 @@
 package com.cody.codeclash.entities;
 
+import java.util.List;
 import java.util.Set;
+import java.util.Objects;
 
 import com.cody.codeclash.entities.enums.Difficulty;
 import com.cody.codeclash.entities.enums.Status;
@@ -12,6 +14,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -48,9 +51,6 @@ public class Problem {
     @OneToOne(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProblemSocialInteraction interaction;
 
-    @OneToOne(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
-    private ProblemTestCaseAndCode testCaseAndCode;
-
     private Long authorId;
 
     private String authorName;
@@ -68,19 +68,12 @@ public class Problem {
     }
     @Override
     public String toString() {
-        return "Problem [id=" + id + ", title=" + title + ", difficulty=" + difficulty +
-        ", decription=" + (description != null ? description.getId() : "null") +
-        ", tags=" + (tags != null ? tags.size() : "null") +
-        ", interaction=" + (interaction != null ? interaction.getId() : "null") +
-         "]";
+        return "Problem [id=" + id + ", title=" + title + ", difficulty=" + difficulty + ", status=" + status +", authorId=" + authorId + ", authorName=" + authorName + "]";
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+        return Objects.hash(id);
     }
 
     @Override

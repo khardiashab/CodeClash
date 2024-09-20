@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.Tag;
+import com.cody.codeclash.entities.dtos.ProblemDto;
 import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.services.ProblemService;
@@ -29,7 +30,7 @@ public class ProblemController {
     ProblemService service;
 
     @GetMapping("")
-    public List<Problem> getAll() {
+    public List<ProblemDto> getAll() {
         return service.getAll();
     }
 
