@@ -1,14 +1,9 @@
 package com.cody.codeclash.entities;
 
-import java.util.List;
 import java.util.Objects;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,26 +22,21 @@ public class ProblemSocialInteraction {
     @Id
     private Long id;
 
+    // Unidirectional one-to-one mapping, Problem is the owner of the relationship
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "id", referencedColumnName = "id") // Using the same primary key
     private Problem problem;
 
-    private Long likes;
-    private Long dislikes;
-
-    private Long saves;
-
-    @OneToMany(mappedBy = "interaction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "interaction", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Rating> ratings;
+    private Long likes = 0L;
+    private Long dislikes = 0L;
+    private Long saves = 0L;
+    private Long submitCount = 0L;
+    private Long solvedCount = 0L;
 
     @Override
     public String toString() {
         return "ProblemSocialInteraction [id=" + id + ", likes=" + likes + ", dislikes=" + dislikes + ", saves="
-                + saves + ", comments=" + (comments != null ? comments.size() : "null") + ", ratings="
-                + (ratings != null ? ratings.size() : "null") + "]";
+                + saves + "]";
     }
 
     @Override
@@ -65,4 +55,5 @@ public class ProblemSocialInteraction {
         ProblemSocialInteraction other = (ProblemSocialInteraction) obj;
         return Objects.equals(id, other.id);
     }
+
 }

@@ -42,14 +42,13 @@ public class Problem {
     @ManyToMany(cascade = CascadeType.REMOVE)
     private Set<Tag> tags;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProblemDescription description;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProblemSocialInteraction interaction;
 
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "problem", cascade = CascadeType.ALL, orphanRemoval = true)
     private ProblemTestCaseAndCode testCaseAndCode;
 
     private Long authorId;

@@ -29,7 +29,7 @@ public class Tag {
 
     private String name;
 
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     private Set<Problem> problems;
 
     @Override

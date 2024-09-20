@@ -4,11 +4,11 @@ import java.util.Objects;
 
 public class UserProblemActionKey implements java.io.Serializable {
     private Long userId;
-    private Long problem;
+    private Long problemId;
 
-    public UserProblemActionKey(Long userId, Long problem) {
+    public UserProblemActionKey(Long userId, Long problemId) {
         this.userId = userId;
-        this.problem = problem;
+        this.problemId = problemId;
     }
 
     @Override
@@ -18,12 +18,12 @@ public class UserProblemActionKey implements java.io.Serializable {
         if (o == null || getClass() != o.getClass())
             return false;
         UserProblemActionKey that = (UserProblemActionKey) o;
-        return userId.equals(that.userId) && problem.equals(that.problem);
+        return userId.equals(that.userId) && problemId.equals(that.problemId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, problem);
+        return Objects.hash(userId, problemId);
     }
 
 }

@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
@@ -27,29 +28,32 @@ public class ProblemTestCaseAndCode {
     @Id
     private Long id;
 
+    // Share the same ID as Problem
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "problem_id")
     private Problem problem;
 
-    @OneToMany(mappedBy = "problem", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    // Unidirectional One-to-Many relationship with EntryCode
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "problem_test_case_and_code_id") // Defines the foreign key in EntryCode table
     private List<EntryCode> entryCodes = new ArrayList<>();
 
-    @OneToMany(mappedBy = "problem", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    // Unidirectional One-to-Many relationship with TestCase
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "problem_test_case_and_code_id") // Defines the foreign key in TestCase table
     private List<TestCase> testCases = new ArrayList<>();
-
-    
 
     public void addEntryCode(EntryCode entryCode) {
         entryCodes.add(entryCode);
     }
 
     public void addTestCase(TestCase testCase) {
-
         testCases.add(testCase);
     }
 
     public void removeEntryCode(EntryCode entryCode) {
-        entryCodes.remove(entryCode);   
+        entryCodes.remove(entryCode);
     }
 
     public void removeTestCase(TestCase testCase) {
