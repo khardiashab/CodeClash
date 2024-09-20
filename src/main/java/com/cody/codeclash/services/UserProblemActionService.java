@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.cody.codeclash.entities.UserProblemAction;
 import com.cody.codeclash.entities.UserProblemActionKey;
+import com.cody.codeclash.entities.dtos.UserProblemActionDto;
 import com.cody.codeclash.repositories.UserProblemActionRepository;
 import com.cody.codeclash.utils.UtilityFunctions;
 
@@ -15,9 +16,9 @@ import lombok.RequiredArgsConstructor;
 public class UserProblemActionService {
     private final UserProblemActionRepository repository;
 
-    public UserProblemAction getById(Long problemId) {
-
-        return repository.findById(getKey(problemId)).orElse(null);
+    public UserProblemActionDto getByProblemId(Long problemId) {
+        UserProblemAction actions = repository.findById(getKey(problemId)).orElseThrow(() -> new EntityNotFoundException("User Problem Action not found: " + problemId));
+        return UserProblemActionDto.from(actions);
     }
 
     public void validUserProblemActionExists(Long problemId) {

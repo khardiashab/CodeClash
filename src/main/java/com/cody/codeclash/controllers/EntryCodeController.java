@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cody.codeclash.entities.dtos.EntryCodeDto;
+
 @RestController
 @RequestMapping("/api/problems/{problemId}/entrycodes")
 public class EntryCodeController {

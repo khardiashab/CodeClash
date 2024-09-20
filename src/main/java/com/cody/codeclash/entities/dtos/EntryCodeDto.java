@@ -1,4 +1,4 @@
-package com.cody.codeclash.controllers;
+package com.cody.codeclash.entities.dtos;
 
 import com.cody.codeclash.entities.EntryCode;
 import com.cody.codeclash.entities.enums.Language;
@@ -39,5 +39,6 @@ public class EntryCodeDto {
                 .language(language)
                 .build();
     }
+
 
 }

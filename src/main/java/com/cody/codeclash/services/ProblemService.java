@@ -7,12 +7,10 @@ import org.springframework.stereotype.Service;
 import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.ProblemDescription;
 import com.cody.codeclash.entities.ProblemSocialInteraction;
-import com.cody.codeclash.entities.ProblemTestCaseAndCode;
 import com.cody.codeclash.entities.Tag;
 import com.cody.codeclash.entities.dtos.ProblemDto;
 import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.entities.enums.Difficulty;
-import com.cody.codeclash.entities.enums.Language;
 import com.cody.codeclash.entities.enums.Status;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.utils.UtilityFunctions;
@@ -90,30 +88,19 @@ public class ProblemService {
         if (null == pd) {
             throw new RuntimeException("Problem description is not set.");
         }
-        ProblemTestCaseAndCode testCaseAndCode = problem.getTestCaseAndCode();
-        if (null == testCaseAndCode) {
-            throw new RuntimeException("Problem testcase and code is not set.");
-        }
-        if (testCaseAndCode.getEntryCodes().size() != Language.values().length) {
-            throw new RuntimeException("You have not set the entry code for all languages.");
-        }
 
-        if (testCaseAndCode.getTestCases().size() < 3) {
-            throw new RuntimeException("You have not set at least 3 test cases.");
-        }
         // Add problem interation table here.
         ProblemSocialInteraction ps = new ProblemSocialInteraction();
         ps.setProblem(Problem.builder().id(problemId).build());
         interactionService.save(ps);
-    
+
         problem.setStatus(Status.PUBLISHED);
         problem.setDescription(null);
-        problem.setTestCaseAndCode(null);
         repository.save(problem);
 
     }
 
-    // Get all problems 
+    // Get all problems
     public List<ProblemDto> getAll() {
         return repository.findAll().stream().map(ProblemDto::from).toList();
     }

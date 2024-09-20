@@ -27,11 +27,11 @@ public class UserProblemAction {
 
     @Id
     private Long problemId;
-    private Reaction reaction;
+    private Reaction reaction = Reaction.NONE;
 
-    private boolean saved;
+    private boolean saved = false;
 
-    private boolean solved;
+    private boolean solved = false;
 
     @Override
     public boolean equals(Object o) {
