@@ -1,5 +1,7 @@
 package com.cody.codeclash.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cody.codeclash.entities.Problem;
 import com.cody.codeclash.entities.Tag;
 import com.cody.codeclash.entities.dtos.ProblemRequestDto;
 import com.cody.codeclash.repositories.ProblemRepository;
@@ -26,13 +28,13 @@ public class ProblemController {
     @Autowired
     ProblemService service;
 
-    @GetMapping("path")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+    @GetMapping("")
+    public List<Problem> getAll() {
+        return service.getAll();
     }
 
     @PostMapping("/")
-    public void creatFullProblemDraft(@RequestBody ProblemRequestDto entity) {
+    public void creatProblemDraft(@RequestBody ProblemRequestDto entity) {
         service.create(entity);
     }
 

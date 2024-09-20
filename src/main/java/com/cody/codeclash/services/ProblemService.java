@@ -1,5 +1,7 @@
 package com.cody.codeclash.services;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.cody.codeclash.entities.Problem;
@@ -73,7 +75,7 @@ public class ProblemService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Problem not found: " + id));
     }
 
-    // Publish a problem 
+    // Publish a problem
 
     @Transactional
     public void publish(Long problemId) {
@@ -84,14 +86,14 @@ public class ProblemService {
             throw new RuntimeException("Problem description is not set.");
         }
         ProblemTestCaseAndCode testCaseAndCode = problem.getTestCaseAndCode();
-        if(null == testCaseAndCode){
+        if (null == testCaseAndCode) {
             throw new RuntimeException("Problem testcase and code is not set.");
         }
-        if(testCaseAndCode.getEntryCodes().size() != Language.values().length){
+        if (testCaseAndCode.getEntryCodes().size() != Language.values().length) {
             throw new RuntimeException("You have not set the entry code for all languages.");
         }
 
-        if(testCaseAndCode.getTestCases().size() < 3){
+        if (testCaseAndCode.getTestCases().size() < 3) {
             throw new RuntimeException("You have not set at least 3 test cases.");
         }
         problem.setStatus(Status.PUBLISHED);
@@ -100,11 +102,16 @@ public class ProblemService {
         repository.save(problem);
 
     }
-    
+
+    // Get all problems 
+    public List<Problem> getAll() {
+        return repository.findAll();
+    }
+
     // Helping function to stop repetative code
 
     public void validateProblemAuthor(Problem problem) {
-        if (problem.getId() != UtilityFunctions.getUserDto().id()) {
+        if (problem.getAuthorId() != UtilityFunctions.getUserDto().id()) {
             throw new RuntimeException("You are not author of this problem with Title: " + problem.getTitle());
         }
     }

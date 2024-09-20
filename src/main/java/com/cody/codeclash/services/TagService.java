@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.cody.codeclash.controllers.TagDto;
 import com.cody.codeclash.entities.Tag;
 import com.cody.codeclash.repositories.TagRepository;
 
@@ -29,8 +30,8 @@ public class TagService {
         return repository.findById(id).orElseThrow(() -> new IllegalArgumentException("Tag not found"));
     }
 
-    public List<Tag> getAll() {
-        return repository.findAll();
+    public List<TagDto> getAll() {
+        return repository.findAll().stream().map(TagDto::from).toList();    
     }
 
     public Tag getByName(String name) {
