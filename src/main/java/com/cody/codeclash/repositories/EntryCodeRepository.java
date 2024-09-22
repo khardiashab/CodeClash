@@ -8,4 +8,6 @@ import com.cody.codeclash.entities.EntryCode;
 @Repository
 public interface EntryCodeRepository extends JpaRepository<EntryCode, Long> {
 
+
+
 }

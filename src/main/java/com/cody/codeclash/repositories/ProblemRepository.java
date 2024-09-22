@@ -7,5 +7,7 @@ import com.cody.codeclash.entities.Problem;
 
 @Repository
 public interface ProblemRepository extends JpaRepository<Problem, Long> {
+
+    boolean existsByIdAndAuthorId(Long problemId, Long authorId);
     
 }

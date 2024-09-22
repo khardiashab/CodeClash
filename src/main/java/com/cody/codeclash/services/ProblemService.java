@@ -14,6 +14,7 @@ import com.cody.codeclash.entities.enums.Difficulty;
 import com.cody.codeclash.entities.enums.Status;
 import com.cody.codeclash.repositories.ProblemRepository;
 import com.cody.codeclash.utils.UtilityFunctions;
+import com.cody.codeclash.utils.excepitons.UnauthorizedException;
 
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -110,6 +111,18 @@ public class ProblemService {
     public void validateProblemAuthor(Problem problem) {
         if (problem.getAuthorId() != UtilityFunctions.getUserDto().id()) {
             throw new RuntimeException("You are not author of this problem with Title: " + problem.getTitle());
+        }
+    }
+
+    public void validateProblemExistence(Long problemId) {
+        if (!repository.existsById(problemId)) {
+            throw new EntityNotFoundException("Problem not found: " + problemId);
+        }
+    }
+
+    public void validateProblemAndItsAuthor(Long problemId, Long authorId) {
+        if(!repository.existsByIdAndAuthorId(problemId, authorId)) {
+            throw new UnauthorizedException("You are not author of this problem with Title: " + problemId);
         }
     }
 
