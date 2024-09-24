@@ -11,11 +11,8 @@ import com.cody.codeclash.entities.enums.Language;
 @Repository
 public interface EntryCodeRepository extends JpaRepository<EntryCode, Long> {
 
-
     boolean existsByProblemIdAndLanguage(Long problemId, Language language);
 
     Optional<EntryCode> findAllByProblemId(Long problemId);
-
-
 
 }
