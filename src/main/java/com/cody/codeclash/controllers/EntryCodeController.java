@@ -2,6 +2,7 @@ package com.cody.codeclash.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,30 +12,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cody.codeclash.entities.dtos.EntryCodeDto;
+import com.cody.codeclash.services.EntryCodeService;
 
 @RestController
 @RequestMapping("/api/problems/{problemId}/entrycodes")
 public class EntryCodeController {
 
+    @Autowired
+    private EntryCodeService service;
     @PostMapping("/")
     public void create(@PathVariable Long problemId, @RequestBody EntryCodeDto entryCode) {
-        // TODO implement here service logic.
+        service.create(problemId, entryCode);
     }
 
     @PutMapping("/{entryCodeId}")
     public void update(@PathVariable Long problemId, @PathVariable Long entryCodeId, @RequestBody EntryCodeDto entryCodeDto) {
-        // TODO implement here service logic.
+        service.update(problemId, entryCodeId, entryCodeDto);
     }
 
     @GetMapping("/{entryCodeId}")
     public EntryCodeDto get(@PathVariable Long problemId, @PathVariable Long entryCodeId) {
-        // TODO implement here service logic.
-        return null;
+        return service.get(problemId, entryCodeId);
     }
 
     @GetMapping("")
     public List<EntryCodeDto> getAllOfAProblem(@PathVariable Long problemId) {
-        // TODO implement here service logic.
-        return null;
+        return service.getAllOfAProblem(problemId);
     }
 }
